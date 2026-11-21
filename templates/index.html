@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Number Nexus | Mathematical Escape</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <a class="brand" href="#">
+            <span class="brand-mark">N</span>
+            <span>NUMBER <b>NEXUS</b></span>
+        </a>
+
+        <div class="top-actions">
+
+            <span class="player-chip" id="playerChip">
+                Guest Player
+            </span>
+
+            <button class="ghost-btn"
+                    id="leaderboardBtn">
+                Leaderboard
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- WELCOME SCREEN -->
+
+        <section id="welcomeScreen"
+                 class="welcome-screen">
+
+            <div class="hero-copy">
+
+                <div class="eyebrow">
+                    <span class="pulse-dot"></span>
+                    THE MATHEMATICAL ESCAPE
+                </div>
+
+                <h1>
+                    Think in numbers.
+                    <br>
+                    <span>Unlock the unknown.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Enter a world of mathematical challenges,
+                    hidden patterns and mysterious number locks.
+                    Can you solve your way out?
+                </p>
+
+                <form id="startForm"
+                      class="start-form">
+
+                    <label for="username">
+                        Choose your player name
+                    </label>
+
+                    <div class="input-row">
+
+                        <input
+                            type="text"
+                            id="username"
+                            minlength="2"
+                            maxlength="20"
+                            placeholder="Enter username"
+                            required
+                        >
+
+                        <button class="primary-btn"
+                                type="submit">
+                            Enter the Nexus →
+                        </button>
+
+                    </div>
+
+                    <small>
+                        Enter at least 2 characters.
+                    </small>
+
+                </form>
+
+            </div>
+
+
+            <!-- DECORATIVE GAME ART -->
+
+            <div class="hero-art">
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="number-tile tile-a">8</div>
+                <div class="number-tile tile-b">?</div>
+                <div class="number-tile tile-c">21</div>
+                <div class="number-tile tile-d">3</div>
+
+                <div class="math-card">
+
+                    <span>2 + 6</span>
+
+                    <strong>= 8</strong>
+
+                    <i>✦</i>
+
+                </div>
+
+                <div class="floating-symbol plus">+</div>
+                <div class="floating-symbol multiply">×</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN GAME SCREEN -->
+
+        <section id="gameScreen"
+                 class="game-screen hidden">
+
+
+            <!-- DASHBOARD HEADING -->
+
+            <div class="dashboard-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        YOUR PUZZLE JOURNEY
+                    </div>
+
+                    <h2>
+                        Welcome back,
+                        <span id="welcomeName">Player</span>
+                    </h2>
+
+                </div>
+
+                <button class="text-btn"
+                        id="homeBtn">
+                    ← Home
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <article class="stat-card">
+
+                    <span class="stat-icon purple">✦</span>
+
+                    <div>
+                        <small>TOTAL SCORE</small>
+
+                        <strong id="totalScore">0</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-icon yellow">✓</span>
+
+                    <div>
+                        <small>LEVELS CLEARED</small>
+
+                        <strong id="levelsCleared">
+                            0 / 15
+                        </strong>
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-icon mint">⌁</span>
+
+                    <div>
+                        <small>NEXT LEVEL</small>
+
+                        <strong id="nextLevel">01</strong>
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- GAME LAYOUT -->
+
+            <div class="game-layout">
+
+
+                <!-- LEVEL SELECTION -->
+
+                <section class="panel levels-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                CHOOSE YOUR CHALLENGE
+                            </span>
+
+                            <h3>The Five Gates</h3>
+
+                        </div>
+
+                        <span class="level-count"
+                              id="levelCount">
+                            0 / 15
+                        </span>
+
+                    </div>
+
+                    <div id="levelsContainer"
+                         class="levels-container">
+                    </div>
+
+                </section>
+
+
+                <!-- PUZZLE SECTION -->
+
+                <section class="panel puzzle-panel"
+                         id="puzzlePanel">
+
+
+                    <!-- EMPTY STATE -->
+
+                    <div id="puzzleEmpty"
+                         class="empty-puzzle">
+
+                        <div class="empty-icon">✧</div>
+
+                        <h3>Your next challenge awaits</h3>
+
+                        <p>
+                            Select an unlocked level
+                            to begin your journey.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ACTIVE PUZZLE -->
+
+                    <div id="puzzleContent"
+                         class="hidden">
+
+
+                        <div class="puzzle-topline">
+
+                            <span class="level-pill"
+                                  id="levelPill">
+                                LEVEL 01
+                            </span>
+
+                            <span class="difficulty"
+                                  id="difficulty">
+                                EASY
+                            </span>
+
+                        </div>
+
+
+                        <div class="puzzle-stage"
+                             id="stageName">
+                            THE BEGINNING
+                        </div>
+
+
+                        <h2 id="puzzleTitle">
+                            Missing Number
+                        </h2>
+
+
+                        <p class="puzzle-instruction">
+                            Solve the puzzle to unlock the next gate.
+                        </p>
+
+
+                        <!-- QUESTION CARD -->
+
+                        <div class="question-card">
+
+                            <span class="question-label">
+                                YOUR CHALLENGE
+                            </span>
+
+                            <div class="question-text"
+                                 id="questionText">
+                            </div>
+
+                        </div>
+
+
+                        <!-- ANSWER FORM -->
+
+                        <form id="answerForm"
+                              class="answer-form">
+
+                            <label for="answerInput">
+                                Your answer
+                            </label>
+
+                            <div class="answer-row">
+
+                                <input
+                                    type="text"
+                                    id="answerInput"
+                                    placeholder="Type your answer..."
+                                    autocomplete="off"
+                                    required
+                                >
+
+                                <button class="primary-btn"
+                                        type="submit">
+                                    Check Answer
+                                </button>
+
+                            </div>
+
+                        </form>
+
+
+                        <!-- HINT -->
+
+                        <div class="puzzle-actions">
+
+                            <button class="hint-btn"
+                                    id="hintBtn">
+
+                                ☼ Get a hint
+                                <span>(−20 points)</span>
+
+                            </button>
+
+                            <span id="attemptLabel">
+                                Attempt 1
+                            </span>
+
+                        </div>
+
+
+                        <!-- FEEDBACK -->
+
+                        <div id="feedback"
+                             class="feedback hidden"
+                             role="status">
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- ACHIEVEMENTS -->
+
+            <section class="panel lower-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            YOUR ACHIEVEMENTS
+                        </span>
+
+                        <h3>Milestones</h3>
+
+                    </div>
+
+                    <button class="text-btn"
+                            id="refreshProgress">
+                        Refresh ↻
+                    </button>
+
+                </div>
+
+                <div id="achievements"
+                     class="achievement-list">
+
+                    <span class="muted">
+                        Complete a level to earn your first achievement.
+                    </span>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>NUMBER NEXUS</span>
+
+        <span>
+            Made for curious minds · Keep thinking ✦
+        </span>
+
+    </footer>
+
+</div>
+
+
+<!-- LEADERBOARD POPUP -->
+
+<div id="leaderboardModal"
+     class="modal hidden">
+
+    <div class="modal-card">
+
+        <button class="modal-close"
+                id="closeModal">
+            ×
+        </button>
+
+        <div class="eyebrow">
+            THE TOP THINKERS
+        </div>
+
+        <h2>Leaderboard</h2>
+
+        <p class="muted">
+            Players ranked by total points.
+        </p>
+
+        <div id="leaderboardList"></div>
+
+    </div>
+
+</div>
+
+
+<!-- NOTIFICATION -->
+
+<div id="toast"
+     class="toast hidden">
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="{{ url_for('static', filename='js/game.js') }}">
+</script>
+
+</body>
+</html>
